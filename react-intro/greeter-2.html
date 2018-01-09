@@ -17,7 +17,7 @@
 				this.onGreetClick = this.onGreetClick.bind(this);
 			}
 			onGreetClick(){
-				let username = prompt('Enter the user name :');
+				let username = this.refs.txtName.value;
 				let message = `Hi ${username}, Have a nice day!`;
 				this.setState({
 					msg : message
@@ -28,6 +28,8 @@
 					<div>
 						<h1>Greeter</h1>
 						<hr />
+						<label>Name : </label>
+						<input type="text" ref="txtName"/>
 						<input type="button" value="Greet" id="btnGreet" onClick={this.onGreetClick}/>
 						<div>{this.state.msg}</div>
 					</div>

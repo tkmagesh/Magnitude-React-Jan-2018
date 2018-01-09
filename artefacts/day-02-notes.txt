@@ -1,0 +1,53 @@
+http://es6-features.org
+
+1. let
+2. const
+3. default arguments
+4. array destructuring
+5. rest operator
+6. spread operator
+7. object destructuring
+8. Arrow functions
+9. classes
+10. template strings
+
+
+
+
+
+methods of an array
+
+1. filter
+2. reduce
+3. map
+4. forEach
+
+http://bit.ly/javascript-training-videos
+
+React
+View Components
+	composition
+
+optimizes the dom updates
+
+
+<div>
+	<h1>Welcome to React.js</h1>
+	<hr>
+	<div>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit tempora voluptas rem ipsa quisquam debitis aliquid doloribus itaque, placeat quia voluptate sapiente, est natus sunt aut earum. Voluptatem, praesentium, aspernatur!</p>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit tempora voluptas rem ipsa quisquam debitis aliquid doloribus itaque, placeat quia voluptate sapiente, est natus sunt aut earum. Voluptatem, praesentium, aspernatur!</p>
+	</div>
+</div>
+
+
+
+props
+	-> component DOESNOT own the data
+	-> the data is given as INPUT to the component
+
+state
+	-> component OWNS the data
+	-> whenever the data changes, react should trigger a re-render the component
+
+onChange

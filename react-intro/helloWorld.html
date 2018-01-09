@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Hello World</title>
+	<script src="react.js"></script>
+	<script src="react-dom.js"></script>
+	<script>
+		function renderNavtive(){
+			var h1Ele = document.createElement('h1');
+			h1Ele.innerHTML = 'Hello World! [Native]';
+			var root = document.getElementById('root-native');
+			root.innerHTML = h1Ele.outerHTML;
+		}
+		function renderReact(){
+			var currentTime = Date().toString();
+			console.log('renderReact invoked at ' + currentTime);
+			ReactDOM.render(React.createElement('h1', null, `Hello World! [${currentTime}]`),
+				document.getElementById('root-react'));
+		}
+
+		function init(){
+			var btnRenderNative = document.getElementById('btnRenderNative');
+			btnRenderNative.addEventListener('click', renderNavtive);
+
+			var btnRenderReact = document.getElementById('btnRenderReact')
+			btnRenderReact.addEventListener('click', renderReact);			
+		}
+		window.addEventListener('DOMContentLoaded', init);
+	</script>
+</head>
+<body>
+	<input type="button" value="Render Native" id="btnRenderNative">
+	<div id="root-native"></div>
+	<input type="button" value="Render React" id="btnRenderReact">
+	<div id="root-react"></div>
+</body>
+</html>

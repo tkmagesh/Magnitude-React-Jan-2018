@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Hello World</title>
+	<script src="react.js"></script>
+	<script src="react-dom.js"></script>
+	<script src="babel.min.js"></script>
+	<script type="text/babel">
+
+		function init(){
+			
+			var view = (
+				<div>
+					<h1>Welcome to React.js</h1>
+					<hr />
+					<div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit tempora voluptas rem ipsa quisquam debitis aliquid doloribus itaque, placeat quia voluptate sapiente, est natus sunt aut earum. Voluptatem, praesentium, aspernatur!</p>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sit tempora voluptas rem ipsa quisquam debitis aliquid doloribus itaque, placeat quia voluptate sapiente, est natus sunt aut earum. Voluptatem, praesentium, aspernatur!</p>
+					</div>
+				</div>
+			);
+			
+			ReactDOM.render(view, document.getElementById('root'));
+		}
+		//window.addEventListener('DOMContentLoaded', init);
+		init();
+	</script>
+</head>
+<body>
+	<div id="root"></div>
+</body>
+</html>

@@ -7,6 +7,7 @@
 	<script src="react-dom.js"></script>
 	<script src="babel.min.js"></script>
 	<script type="text/babel">
+
 		class CalculatorModel{
 			n1 = 0;
 			n2 = 0;
@@ -40,12 +41,19 @@
 				this.onSubtractClick = this.onSubtractClick.bind(this);
 				this.onMultiplyClick = this.onMultiplyClick.bind(this);
 				this.onDivideClick = this.onDivideClick.bind(this);
+				this.onNumber1Change = this.onNumber1Change.bind(this);
+				this.onNumber2Change = this.onNumber2Change.bind(this);
+			}
+			onNumber1Change(evt){
+				let model = this.props.model;
+				model.n1 = evt.target.valueAsNumber;
+			}
+			onNumber2Change(evt){
+				let model = this.props.model;
+				model.n2 = evt.target.valueAsNumber;
 			}
 			onAddClick(){
 				let model = this.props.model;
-
-				model.n1 = this.refs.txtNumber1.valueAsNumber,
-				model.n2 = this.refs.txtNumber2.valueAsNumber;
 				model.add();
 				this.setState({
 					result : model.result
@@ -53,9 +61,6 @@
 			}
 			onSubtractClick(){
 				let model = this.props.model;
-
-				model.n1 = this.refs.txtNumber1.valueAsNumber,
-				model.n2 = this.refs.txtNumber2.valueAsNumber;
 				model.subtract();
 				this.setState({
 					result : model.result
@@ -63,9 +68,6 @@
 			}
 			onMultiplyClick(){
 				let model = this.props.model;
-
-				model.n1 = this.refs.txtNumber1.valueAsNumber,
-				model.n2 = this.refs.txtNumber2.valueAsNumber;
 				model.multiply();
 				this.setState({
 					result : model.result
@@ -73,9 +75,6 @@
 			}
 			onDivideClick(){
 				let model = this.props.model;
-
-				model.n1 = this.refs.txtNumber1.valueAsNumber,
-				model.n2 = this.refs.txtNumber2.valueAsNumber;
 				model.divide();
 				this.setState({
 					result : model.result
@@ -86,8 +85,8 @@
 					<div>
 						<h1>Calculator</h1>
 						<hr />
-						<input type="number" ref="txtNumber1" />
-						<input type="number" ref="txtNumber2" />
+						<input type="number" ref="txtNumber1" onChange={this.onNumber1Change}/>
+						<input type="number" ref="txtNumber2" onChange={this.onNumber2Change}/>
 						<input type="button" value="Add" onClick={this.onAddClick}/>
 						<input type="button" value="Subtract" onClick={this.onSubtractClick}/>
 						<input type="button" value="Multiply" onClick={this.onMultiplyClick}/>

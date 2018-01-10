@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Calculator - 1</title>
+	<script src="react.js"></script>
+	<script src="react-dom.js"></script>
+	<script src="babel.min.js"></script>
+	<script type="text/babel">
+		class CalculatorModel{
+			n1 = 0;
+			n2 = 0;
+			result = 0;
+
+			add(){
+				this.result = this.n1 + this.n2;
+			}
+
+			subtract(){
+				this.result = this.n1 - this.n2;
+			}
+
+			multiply(){
+				this.result = this.n1 * this.n2;
+			}
+
+			divide(){
+				this.result = this.n1 / this.n2;
+			}
+		}
+
+
+		class Calculator extends React.Component{
+			state = {
+				result : 0
+			};
+			constructor(){
+				super();
+				this.onAddClick = this.onAddClick.bind(this);
+				this.onSubtractClick = this.onSubtractClick.bind(this);
+				this.onMultiplyClick = this.onMultiplyClick.bind(this);
+				this.onDivideClick = this.onDivideClick.bind(this);
+			}
+			onAddClick(){
+				let model = this.props.model;
+
+				model.n1 = this.refs.txtNumber1.valueAsNumber,
+				model.n2 = this.refs.txtNumber2.valueAsNumber;
+				model.add();
+				this.setState({
+					result : model.result
+				});
+			}
+			onSubtractClick(){
+				let model = this.props.model;
+
+				model.n1 = this.refs.txtNumber1.valueAsNumber,
+				model.n2 = this.refs.txtNumber2.valueAsNumber;
+				model.subtract();
+				this.setState({
+					result : model.result
+				});
+			}
+			onMultiplyClick(){
+				let model = this.props.model;
+
+				model.n1 = this.refs.txtNumber1.valueAsNumber,
+				model.n2 = this.refs.txtNumber2.valueAsNumber;
+				model.multiply();
+				this.setState({
+					result : model.result
+				});
+			}
+			onDivideClick(){
+				let model = this.props.model;
+
+				model.n1 = this.refs.txtNumber1.valueAsNumber,
+				model.n2 = this.refs.txtNumber2.valueAsNumber;
+				model.divide();
+				this.setState({
+					result : model.result
+				});
+			}
+			render(){
+				return(
+					<div>
+						<h1>Calculator</h1>
+						<hr />
+						<input type="number" ref="txtNumber1" />
+						<input type="number" ref="txtNumber2" />
+						<input type="button" value="Add" onClick={this.onAddClick}/>
+						<input type="button" value="Subtract" onClick={this.onSubtractClick}/>
+						<input type="button" value="Multiply" onClick={this.onMultiplyClick}/>
+						<input type="button" value="Divide" onClick={this.onDivideClick}/>
+						<div>{this.state.result}</div>
+					</div>
+				)
+			}
+		}
+
+		let calculatorModel = new CalculatorModel();
+
+		ReactDOM.render(<Calculator model={calculatorModel}/>,
+			document.getElementById('root'));
+	</script>
+</head>
+<body>
+	<div id="root"></div>
+</body>
+</html>

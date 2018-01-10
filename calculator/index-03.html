@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Calculator - 1</title>
+	<script src="react.js"></script>
+	<script src="react-dom.js"></script>
+	<script src="babel.min.js"></script>
+	<script type="text/babel">
+
+		class EventEmitter{
+			_listeners = [];
+
+			subscribe(listenerFn){
+				if (typeof listenerFn === 'function')
+					this._listeners.push(listenerFn);
+			}
+
+			trigger(){
+				this._listeners.forEach(listenerFn => listenerFn());
+			}
+		}
+
+		class CalculatorModel extends EventEmitter{
+			n1 = 0;
+			n2 = 0;
+			result = 0;
+
+			add(){
+				this.result = this.n1 + this.n2;
+				this.trigger();
+			}
+
+			subtract(){
+				this.result = this.n1 - this.n2;
+				this.trigger();
+			}
+
+			multiply(){
+				this.result = this.n1 * this.n2;
+				this.trigger();
+			}
+
+			divide(){
+				this.result = this.n1 / this.n2;
+				this.trigger();
+			}
+		}
+
+
+		class Calculator extends React.Component{
+			render(){
+				let { model } = this.props;
+				return(
+					<div>
+						<h1>Calculator</h1>
+						<hr />
+						<input type="number" ref="txtNumber1" onChange={(evt) => model.n1 = evt.target.valueAsNumber}/>
+						<input type="number" ref="txtNumber2" onChange={(evt) => model.n2 = evt.target.valueAsNumber}/>
+						<input type="button" value="Add" onClick={() => model.add()}/>
+						<input type="button" value="Subtract" onClick={() => model.subtract()}/>
+						<input type="button" value="Multiply" onClick={() => model.multiply()}/>
+						<input type="button" value="Divide" onClick={() => model.divide()}/>
+						<div>{model.result}</div>
+					</div>
+				)
+			}
+		}
+
+		let calculatorModel = new CalculatorModel();
+		function renderApp(){
+			ReactDOM.render(<Calculator model={calculatorModel}/>,
+				document.getElementById('root'));
+		}
+		calculatorModel.subscribe(renderApp);
+		renderApp();
+	</script>
+</head>
+<body>
+	<div id="root"></div>
+</body>
+</html>

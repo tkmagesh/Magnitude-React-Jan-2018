@@ -73,6 +73,7 @@
 
 			toggle(){
 				this.isClosed = !this.isClosed;
+				console.log(this);
 			}
 		}
 
@@ -94,6 +95,7 @@
 			}
 
 		}
+
 		class BugTracker extends React.Component{
 			constructor(){
 				super();
@@ -108,10 +110,7 @@
 				let bugs = model.getList();
 
 				let bugItems = bugs.map((bug, index) => (
-					<li key={index}>
-						<span className="bugname">{bug.name}</span>
-						<div className="datetime">[Created At]</div>
-					</li>
+					<BugItem bug={bug} key={index} />
 				));
 
 				return(
@@ -137,6 +136,18 @@
 			}
 		}
 
+		class BugItem extends React.Component{
+			render(){
+				let { bug } = this.props;
+				return(
+					<li >
+						<span className="bugname" onClick={() => bug.toggle()}>{bug.name}</span>
+						<div>[{bug.isClosed.toString()}]</div>
+						<div className="datetime">[Created At]</div>
+					</li>
+				)
+			}
+		}
 		var bugsCollection = new BugsCollection();
 		function renderApp(){
 			ReactDOM.render(<BugTracker model={bugsCollection}/>,

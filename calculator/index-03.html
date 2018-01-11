@@ -3,6 +3,12 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Calculator - 1</title>
+	<style>
+		label{
+			display : block;
+		}
+
+	</style>
 	<script src="react.js"></script>
 	<script src="react-dom.js"></script>
 	<script src="babel.min.js"></script>
@@ -48,6 +54,25 @@
 		}
 
 
+		class CalculatorResult extends React.Component{
+			render(){
+				return (
+					<div>{this.props.data}</div>
+				)
+			}
+		}
+
+		class CalculatorInput extends React.Component{
+			render(){
+				return(
+					<div>
+						<label>{this.props.displayName}</label>
+						<input type="number" ref="txtNumber1" onChange={(evt) => this.props.onInput(evt.target.valueAsNumber)}/>
+					</div>
+				)
+			}
+		}
+
 		class Calculator extends React.Component{
 			render(){
 				let { model } = this.props;
@@ -55,13 +80,13 @@
 					<div>
 						<h1>Calculator</h1>
 						<hr />
-						<input type="number" ref="txtNumber1" onChange={(evt) => model.n1 = evt.target.valueAsNumber}/>
-						<input type="number" ref="txtNumber2" onChange={(evt) => model.n2 = evt.target.valueAsNumber}/>
+						<CalculatorInput displayName="Number 1 :" onInput={(value) => model.n1 = value}/>
+						<CalculatorInput displayName="Number 2 :" onInput={(value) => model.n2 = value}/>
 						<input type="button" value="Add" onClick={() => model.add()}/>
 						<input type="button" value="Subtract" onClick={() => model.subtract()}/>
 						<input type="button" value="Multiply" onClick={() => model.multiply()}/>
 						<input type="button" value="Divide" onClick={() => model.divide()}/>
-						<div>{model.result}</div>
+						<CalculatorResult data={model.result}/>
 					</div>
 				)
 			}

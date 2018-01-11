@@ -63,17 +63,19 @@
 			}
 		}
 
-		class Bug{
+		class Bug extends EventEmitter{
 			name = '';
 			isClosed = false;
 
 			constructor(name){
+				super();
 				this.name = name;
 			}
 
 			toggle(){
 				this.isClosed = !this.isClosed;
 				console.log(this);
+				this.trigger();
 			}
 		}
 
@@ -86,6 +88,7 @@
 
 			add(bugName){
 				let newBug = new Bug(bugName);
+				newBug.subscribe(this.trigger.bind(this));
 				this._list.push(newBug);
 				this.trigger();
 			}

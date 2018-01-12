@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>State Manager</title>
-	<script src="stateManager.js"></script>
+	<script src="redux.js"></script>
 	<script>
 		/*
 		var increment_action = { type : 'INCREMENT' }
@@ -35,7 +35,6 @@
 
 	<script type="text/babel">
 		class Spinner extends React.Component{
-			
 			render(){
 				let { value, increment, decrement } = this.props;
 				return(
@@ -66,8 +65,8 @@
 			return currentState;
 		}
 
-		let store = SM.createStore(spinnerReducer);
-		let spinnerActions = SM.bindActionCreators(spinnerActionsCreators, store.dispatch);
+		let store = Redux.createStore(spinnerReducer);
+		let spinnerActions = Redux.bindActionCreators(spinnerActionsCreators, store.dispatch);
 
 		function renderApp(){
 			let spinnerValue = store.getState();

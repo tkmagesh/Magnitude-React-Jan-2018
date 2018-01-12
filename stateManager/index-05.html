@@ -35,34 +35,50 @@
 
 	<script type="text/babel">
 		class Spinner extends React.Component{
-			
+			constructor(){
+				super();
+				this.onIncrementClick = this.onIncrementClick.bind(this);
+				this.onDecrementClick = this.onDecrementClick.bind(this);
+			}
+			onIncrementClick(){
+				let { increment } = this.props,
+					deltaValue = this.refs.txtDelta.valueAsNumber;
+				increment(deltaValue);
+			}
+			onDecrementClick(){
+				let { decrement } = this.props,
+					deltaValue = this.refs.txtDelta.valueAsNumber;
+				decrement(deltaValue);
+			}
 			render(){
 				let { value, increment, decrement } = this.props;
 				return(
 					<div>
-						<input type="button" value="Decrement" onClick={decrement}/>
+						<input type="number" ref="txtDelta" />
+						<br/>
+						<input type="button" value="Decrement" onClick={this.onDecrementClick}/>
 						<span> [ {value} ] </span>
-						<input type="button" value="Increment" onClick={increment}/>
+						<input type="button" value="Increment" onClick={this.onIncrementClick}/>
 					</div>
 				)
 			}
 		}
 		
 		var spinnerActionsCreators = {
-			increment : function(){
-				return { type : 'INCREMENT' };
+			increment : function(deltaValue){
+				return { type : 'INCREMENT', payload : deltaValue };
 			},
-			decrement : function(){
-				return { type : 'DECREMENT' };
+			decrement : function(deltaValue){
+				return { type : 'DECREMENT', payload : deltaValue };
 			}
 		}
 		
 
 		function spinnerReducer(currentState = 0, action){
 			if (action.type === 'INCREMENT')
-				return ++currentState;
+				return currentState + action.payload;
 			if (action.type === 'DECREMENT')
-				return --currentState;
+				return currentState - action.payload
 			return currentState;
 		}
 

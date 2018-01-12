@@ -1,5 +1,5 @@
-var SM = (function(){
-	var _reducer,
+let SM = (function(){
+	let _reducer,
 		_currentState,
 		_listeners = [],
 		_init_action = {
@@ -23,12 +23,21 @@ var SM = (function(){
 	}
 
 	function dispatch(action){
-		var newState = _reducer(_currentState, action);
+		let newState = _reducer(_currentState, action);
 		if (newState === _currentState) return;
 		_currentState = newState;
 		triggerStateChange();
 	}
 
+	function bindActionCreators(actionCreators, dispatch){
+		let result = {};
+		for(let key in actionCreators){
+			result[key] = function(){
+				dispatch(actionCreators[key].apply(undefined, arguments));
+			}
+		}
+		return result;
+	}
 	function createStore(reducer){
 		_reducer = reducer;
 		_currentState = _reducer(_currentState, _init_action);
@@ -39,6 +48,7 @@ var SM = (function(){
 		};
 	}
 	return {
-		createStore : createStore
+		createStore : createStore,
+		bindActionCreators : bindActionCreators
 	};
 })();

@@ -32,6 +32,11 @@ var SM = (function(){
 	function createStore(reducer){
 		_reducer = reducer;
 		_currentState = _reducer(_currentState, _init_action);
+		return {
+			getState : getState,
+			subscribe : subscribe,
+			dispatch : dispatch
+		};
 	}
 	return {
 		createStore : createStore

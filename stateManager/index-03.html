@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>State Manager</title>
+	<script src="stateManager.js"></script>
+	<script>
+		/*
+		var increment_action = { type : 'INCREMENT' }
+		var decrement_action = { type : 'DECREMENT' }
+
+		function spinnerReducer(currentState = 0, action){
+			if (action.type === 'INCREMENT')
+				return ++currentState;
+			if (action.type === 'DECREMENT')
+				return --currentState;
+			return currentState;
+		}
+		var store = SM.createStore(spinnerReducer);
+
+		store.subscribe(() => console.log('current state = ', store.getState()));
+
+		//repeat the following in random order and observe the output
+
+		store.dispatch(increment_action)
+
+		store.dispatch(decrement_action)
+		*/
+
+	</script>
+
+	<script src="react.js"></script>
+	<script src="react-dom.js"></script>
+	<script src="babel.min.js"></script>
+
+	<script type="text/babel">
+		class Spinner extends React.Component{
+			render(){
+				console.log(this.props);
+				let { value, increment, decrement } = this.props;
+				return(
+					<div>
+						<input type="button" value="Decrement" onClick={decrement}/>
+						<span> [ {value} ] </span>
+						<input type="button" value="Increment" onClick={increment}/>
+					</div>
+				)
+			}
+		}
+		
+		function getSpinnerActions(dispatch){
+			return {
+				increment : function(){
+					dispatch({ type : 'INCREMENT' });
+				},
+				decrement : function(){
+					dispatch({ type : 'DECREMENT' });
+				}
+			}
+		}
+
+		function spinnerReducer(currentState = 0, action){
+			if (action.type === 'INCREMENT')
+				return ++currentState;
+			if (action.type === 'DECREMENT')
+				return --currentState;
+			return currentState;
+		}
+
+		let store = SM.createStore(spinnerReducer);
+		let spinnerActions = getSpinnerActions(store.dispatch);
+
+		function renderApp(){
+			let spinnerValue = store.getState();
+			/*ReactDOM.render(
+				<Spinner value={spinnerValue} increment={spinnerActions.increment} decrement={spinnerActions.decrement} />,
+				document.getElementById('root'));*/
+			ReactDOM.render(
+				<Spinner value={spinnerValue} {...spinnerActions} />,
+				document.getElementById('root'));
+		}
+		store.subscribe(renderApp);
+		renderApp();
+
+	</script>
+</head>
+<body>
+	<div id="root"></div>
+</body>
+</html>

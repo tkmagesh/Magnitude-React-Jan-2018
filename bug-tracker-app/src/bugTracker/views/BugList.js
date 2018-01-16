@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import BugItem from './BugItem';
 
-class BugList extends React.Component{
-	onRemoveClosedClick(){
-		let bugsToRemove = this.props.bugs.filter(bug => bug.isClosed);
-		this.props.removeClosed(bugsToRemove);
-	}
+class BugList extends Component{
 	render(){
-		let {bugs, toggle} = this.props;
+		let {bugs, toggle, removeClosed} = this.props;
 		let bugItems = bugs.map((bug, index) => (
 			<BugItem bug={bug} key={index} toggle={toggle}/>
 		));
@@ -16,7 +12,7 @@ class BugList extends React.Component{
 				<ol>
 					{bugItems}
 				</ol>
-				<input type="button" value="Remove Closed" onClick={this.onRemoveClosedClick.bind(this)}/>
+				<input type="button" value="Remove Closed" onClick={removeClosed}/>
 			</section>
 		)
 	}

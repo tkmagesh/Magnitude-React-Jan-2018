@@ -10,7 +10,10 @@ import BugList from './views/BugList';
 import bugActionCreators from './actions/bugActions';
 
 
-class BugTracker extends React.Component{			
+class BugTracker extends Component{
+	componentDidMount(){
+		this.props.getAll();
+	}		
 	render(){
 		let { bugs, toggle, addNew, removeClosed } = this.props;
 		return(

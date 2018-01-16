@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class BugItem extends React.Component{
+class BugItem extends Component{
 	render(){
 		let { bug, toggle } = this.props;
 		let bugNameItem = bug.isClosed ? 

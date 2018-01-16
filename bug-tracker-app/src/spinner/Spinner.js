@@ -21,7 +21,7 @@ class Spinner extends Component{
 		decrement(deltaValue);
 	}
 	render(){
-		let { value, increment, decrement } = this.props;
+		let { value } = this.props;
 		return(
 			<div>
 				<input type="number" ref="txtDelta" />

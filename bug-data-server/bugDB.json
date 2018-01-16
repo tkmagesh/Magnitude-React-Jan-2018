@@ -1,0 +1,26 @@
+{
+  "bugs": [
+    {
+      "id": 4,
+      "name": "routing is not routing",
+      "isClosed": false,
+      "createdAt": "2017-12-30T10:52:32.027Z"
+    },
+    {
+      "id": 5,
+      "name": "Application is not responding",
+      "isClosed": false,
+      "createdAt": "2018-01-16T16:53:34.181Z"
+    }
+  ],
+  "projects": [
+    {
+      "id": "P102",
+      "name": "Bug Tracker"
+    },
+    {
+      "id": "P101",
+      "name": "Payroll Management"
+    }
+  ]
+}

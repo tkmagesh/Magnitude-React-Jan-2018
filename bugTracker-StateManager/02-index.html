@@ -181,12 +181,78 @@
 			return currentState;
 		}
 
-		var store = Redux.createStore(bugsReducer);
+		{/*
+			Spinner
+		*/}
+
+		class Spinner extends React.Component{
+			constructor(){
+				super();
+				this.onIncrementClick = this.onIncrementClick.bind(this);
+				this.onDecrementClick = this.onDecrementClick.bind(this);
+			}
+			onIncrementClick(){
+				let { increment } = this.props,
+					deltaValue = this.refs.txtDelta.valueAsNumber;
+				increment(deltaValue);
+			}
+			onDecrementClick(){
+				let { decrement } = this.props,
+					deltaValue = this.refs.txtDelta.valueAsNumber;
+				decrement(deltaValue);
+			}
+			render(){
+				let { value, increment, decrement } = this.props;
+				return(
+					<div>
+						<input type="number" ref="txtDelta" />
+						<br/>
+						<input type="button" value="Decrement" onClick={this.onDecrementClick}/>
+						<span> [ {value} ] </span>
+						<input type="button" value="Increment" onClick={this.onIncrementClick}/>
+					</div>
+				)
+			}
+		}
+		var spinnerActionsCreators = {
+			increment : function(deltaValue){
+				return { type : 'INCREMENT', payload : deltaValue };
+			},
+			decrement : function(deltaValue){
+				return { type : 'DECREMENT', payload : deltaValue };
+			}
+		}
+		function spinnerReducer(currentState = 0, action){
+			if (action.type === 'INCREMENT')
+				return currentState + action.payload;
+			if (action.type === 'DECREMENT')
+				return currentState - action.payload
+			return currentState;
+		}
+
+		var rootReducer = Redux.combineReducers({
+			spinnerData : spinnerReducer,
+			bugsData : bugsReducer
+		});
+
+		var store = Redux.createStore(rootReducer);
+
+		let spinnerActions = Redux.bindActionCreators(spinnerActionsCreators, store.dispatch);
+		
 		var bugActions = Redux.bindActionCreators(bugActionCreators, store.dispatch);
+		
 
 		function renderApp(){
-			let bugs = store.getState();
-			ReactDOM.render(<BugTracker bugs={bugs} {...bugActions} />,
+			let state = store.getState(),
+				bugs = state.bugsData,
+				spinnerValue = state.spinnerData;
+
+			ReactDOM.render(
+				<div>
+					<BugTracker bugs={bugs} {...bugActions} />
+					<hr />
+					<Spinner value={spinnerValue} {...spinnerActions} />
+				</div>,
 				document.getElementById('root'));
 		}
 		store.subscribe(renderApp);
